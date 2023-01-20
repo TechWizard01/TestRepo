@@ -12,7 +12,8 @@ exports.create = async (req,res) => {
 exports.delete = async (req,res) => {
     try {
         const response = await da.deleteUser(req.body);
-        res.json({message: "Successful", response : response});
+        if(response) res.json({message: "Successful", response : response});
+        else res.status(404).json({message:"User not found!"});
     } catch (err) {
         res.status(504).json({message: "Error!", response: err});
     }
@@ -21,7 +22,8 @@ exports.delete = async (req,res) => {
 exports.update = async (req,res) => {
     try {
         const response = await da.updateUser(req.body);
-        res.json({message: "Successful", response : response});
+        if(response) res.json({message: "Successful", response : response});
+        else res.status(404).json({message:"User not found!"});
     } catch (err) {
         res.status(504).json({message: "Error!", response: err});
     }
@@ -30,7 +32,8 @@ exports.update = async (req,res) => {
 exports.get = async (req,res) => {
     try {
         const response = await da.getUser(req.body);
-        res.json({message: "Successful", response : response});
+        if(response) res.json({message: "Successful", response : response});
+        else res.status(404).json({message:"User not found!"});
     } catch (err) {
         res.status(504).json({message: "Error!", response: err});
     }
@@ -39,7 +42,8 @@ exports.get = async (req,res) => {
 exports.getAll = async (req,res) => {
     try {
         const response = await da.getAll(req.body);
-        res.json({message: "Successful", response : response});
+        if(response) res.json({message: "Successful", response : response});
+        else res.json({message:"No user found in the database!"});
     } catch (err) {
         res.status(504).json({message: "Error!", response: err});
     }
